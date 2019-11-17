@@ -16,7 +16,6 @@ class Menu extends CI_Controller
         $img            = $user['img'];
         $date_created   = $user['date_created'];
         $data = [
-            'title'         => 'Safeco | dashboard',
             'head'          => 'Menu',
             'name'          => $name,
             'img'           => $img,
@@ -38,18 +37,30 @@ class Menu extends CI_Controller
         $img            = $user['img'];
         $date_created   = $user['date_created'];
         $data = [
-            'title'         => 'Safeco | dashboard',
-            'head'          => 'menu',
+            'head'          => 'Menu',
             'name'          => $name,
             'img'           => $img,
             'date_created'  => $date_created
         ];
 
-        $data['menu'] = $this->db->get('menu')->result_array();
+        $data['menu'] = $this->db->get_where('menu', ['id' => $this->uri->segment(3)])->row_array();
+
+
         $this->load->view('templates/head', $data);
         $this->load->view('templates/nav', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('menu/edit');
         $this->load->view('templates/footer');
+    }
+
+    public function delete()
+    {
+        $id = $this->uri->segment(3);
+        $this->db->delete('menu', ['id' => $id]);
+        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            Menu berhasil dihapus
+            </div>');
+        redirect('menu'); 
     }
 }

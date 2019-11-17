@@ -1,3 +1,4 @@
+<?= $this->session->flashdata('message'); ?>
 <div class="box">
     <div class="box-header">
         <h3 class="box-title">Data Menu</h3>
@@ -26,8 +27,8 @@
                         <td><?= $m['url']; ?></td>
                         <td><?= $m['is_active']; ?></td>
                         <td>
-                            <a href="<?= base_url('menu/edit/' . $m['id']); ?>" class="btn btn-flat btn-xs  btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
-                            <a href="" class="btn btn-flat btn-xs  btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                            <a onclick="return alert('Fitur ini akan segera ditambahkan ? ');"  href="#" class="btn btn-flat btn-xs  btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                            <a onclick="return alert('Fitur ini akan segera ditambahkan ? ');" href="#" class="btn btn-flat btn-xs  btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

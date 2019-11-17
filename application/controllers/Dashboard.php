@@ -16,8 +16,7 @@ class Dashboard extends CI_Controller
         $img            = $user['img'];
         $date_created   = $user['date_created'];
         $data = [
-            'title'         => 'Safeco | dashboard',
-            'head'          => 'dashboard',
+            'head'          => 'Dashboard',
             'name'          => $name,
             'img'           => $img,
             'date_created'  => $date_created

@@ -25,8 +25,7 @@ class Users extends CI_Controller
         $img  = $user['img'];
         $date_created = $user['date_created'];
         $data = [
-            'title'         => 'Safeco | dashboard',
-            'head'          => 'users',
+            'head'          => 'Users',
             'name'          => $name,
             'img'           => $img,
             'date_created'  => $date_created
@@ -102,8 +101,8 @@ class Users extends CI_Controller
             ];
             $this->user->update($data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Data berhasil diubah
-            </div>');
+                Data berhasil diubah
+                </div>');
             redirect('users');
         }
     }
@@ -156,8 +155,8 @@ class Users extends CI_Controller
             ];
             $this->db->insert('users', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Data berhasil disimpan
-            </div>');
+                Data berhasil disimpan
+                </div>');
             redirect('users');
         }
     }
@@ -167,8 +166,8 @@ class Users extends CI_Controller
         $id = $this->uri->segment(3);
         $this->user->hapus();
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Data berhasil dihapus
-        </div>');
+            Data berhasil dihapus
+            </div>');
         redirect('users');
     }
 }

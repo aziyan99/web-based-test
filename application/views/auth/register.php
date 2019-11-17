@@ -1,6 +1,6 @@
 <div class="register-box">
     <div class="register-logo">
-        <a href="#"><b>Safeco</b>LTE</a>
+        <a href="#"><b><?= $nama['nama_sistem']; ?></b></a>
     </div>
 
     <div class="register-box-body">

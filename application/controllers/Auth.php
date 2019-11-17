@@ -47,14 +47,14 @@ class Auth extends CI_Controller
                 redirect('dashboard');
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                Password anda salah
-                </div>');
+                    Password anda salah
+                    </div>');
                 redirect('auth');
             }
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-            Email anda tidak terdaftar
-            </div>');
+                Email anda tidak terdaftar
+                </div>');
             redirect('auth');
         }
     }
@@ -64,13 +64,14 @@ class Auth extends CI_Controller
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('role_id');
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                Anda telah keluar
+            Anda telah keluar
             </div>');
         redirect('auth');
     }
 
     public function register()
     {
+        $data['nama'] = $this->db->get('pengaturan')->row_array();
         $this->form_validation->set_rules('nama', 'Nama', 'trim|required', [
             'required' => 'Nama anda tidak boleh kosong!'
         ]);
@@ -88,12 +89,12 @@ class Auth extends CI_Controller
         ]);
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('templates/auth_head');
-            $this->load->view('auth/register');
+            $this->load->view('templates/auth_head', $data);
+            $this->load->view('auth/register', $data);
             $this->load->view('templates/auth_foot');
         } else {
             $data = [
-                'role_id'       => 3,
+                'role_id'       => 2,
                 'nama'          => htmlspecialchars($this->input->post('nama'), TRUE),
                 'email'         => htmlspecialchars($this->input->post('email'), TRUE),
                 'password'      => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
@@ -102,8 +103,8 @@ class Auth extends CI_Controller
             ];
             $this->db->insert('users', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Anda telah terdaftar, silahkan untuk masuk ke portal
-            </div>');
+                Anda telah terdaftar, silahkan untuk masuk ke portal
+                </div>');
             redirect('auth');
         }
     }
