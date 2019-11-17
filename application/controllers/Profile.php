@@ -150,9 +150,6 @@ class Profile extends CI_Controller
     {
         $config['upload_path'] = FCPATH . 'assets/img/profile/';
         $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size'] = '100';
-        $config['max_width']  = '1024';
-        $config['max_height']  = '768';
 
         $this->load->library('upload');
         $this->upload->initialize($config);
@@ -160,7 +157,7 @@ class Profile extends CI_Controller
         if (!$this->upload->do_upload('image')) {
 
             $errors = $this->upload->display_errors();
-            $this->load->view('erros/sistem/errUpload', $errors);
+            $this->load->view('errors/sistem/errUpload', $errors);
         } else {
             $data = array('upload_data' => $this->upload->data());
             $file_name = $data['upload_data']['file_name'];
