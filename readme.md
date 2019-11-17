@@ -1,6 +1,6 @@
-####### CI BASE SYSTEM DEVELOPMENT ########
+# CI WEB BASE TEST
 
-CI BASE DEVELOPMENT SYSTEM merupakan sebuah aplikasi mendasar dalam mengembangkan aplikasi berbasis web mengunakan framework codeignier yang mengunakan bahasa pemrograman PHP. Didalam aplikasi ini sudah termasuk fasilitas daftar dan masuk ke sistem dengan Access Control Management dimana hak akses pengguna sistem dibatasi berdasarkan Role nya. Template ini cocok untuk menjadi starter projek bagi teman teman atau sebagai bahan edukasi bagi teman teman yang ingin mendalami framework codeingniter.
+CI - WBT Merupakan platform untuk membuat dan menjawab soal secara online
 
 ### Fitur
 - Daftar User Baru
@@ -11,8 +11,6 @@ CI BASE DEVELOPMENT SYSTEM merupakan sebuah aplikasi mendasar dalam mengembangka
 - Dynamic Menu Sistem
 - Terintergrasi dengan template AdminLTE
 - Struktur Templating
-- PHP password_hash
-
 
 ### KEBUTUHAN SERVER DAN SISTEM
 - PHP Versi 5 Keatas atau pun yang support Codeigniter V3\
@@ -23,7 +21,7 @@ CI BASE DEVELOPMENT SYSTEM merupakan sebuah aplikasi mendasar dalam mengembangka
 ### CARA PENGINSTALAN
 - Copy kan folder ini kedalam root folder server
 - Edit Database username, password, Server, dan Databasename di folder config/database.php
-- Kemudian akses di browser http://webname atau bagi yang menggunakannya di localhost bisa akses di http://localhost/ci-base/
+- Kemudian akses di browser http://webname atau bagi yang menggunakannya di localhost bisa akses di http://localhost/wbt/
 
 
 ### LICENCE !!

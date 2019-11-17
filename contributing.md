@@ -1,3 +1,0 @@
-# Contributing to Sim-rtCi
-
-
