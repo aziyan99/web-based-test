@@ -31,6 +31,7 @@
                                 ?>
                         </td>
                         <td>
+                            <a href="<?= base_url('pembahasan/soal/') . $data['id']; ?>" class="btn btn-flat btn-xs  btn-primary"><i class="fa fa-file-text-o"></i></a>
                             <a href="<?= base_url('soal/detail/') . $data['id']; ?>" class="btn btn-flat btn-xs  btn-info"><i class="glyphicon glyphicon-eye-open"></i></a>
                             <a href="<?= base_url('soal/ubah/') . $data['id']; ?>" class="btn btn-flat btn-xs  btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
                             <a onclick="return confirm('Hapus soal ini ?' );" href="<?= base_url('soal/hapus/') . $data['id']; ?>" class="btn btn-flat btn-xs  btn-danger"><i class="glyphicon glyphicon-remove"></i></a>

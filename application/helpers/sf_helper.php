@@ -15,7 +15,14 @@ function is_logged_in()
         $userAccessMenu = $ci->db->get_where('user_access_menu', ['role_id' => $role_id, 'menu_id' => $menuId])->row_array();
 
         if (!$userAccessMenu) {
-            redirect('auth/blocked');
+            if ($menu == 'pembahasan' && $role_id == 1) {
+                return true;
+            } else if ($menu == 'pembahasan' && $role_id == 2) {
+                return true;
+            } else {
+
+                redirect('auth/blocked');
+            }
         }
     }
 }

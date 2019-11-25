@@ -8,6 +8,7 @@ class Soal extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->model('Soal_model', 'soal');
+        $this->load->model('Pembahasan_model', 'pembahasan');
         $this->load->library('form_validation');
         $this->load->helper('text');
     }
@@ -81,7 +82,9 @@ class Soal extends CI_Controller
             $this->load->view('soal/add');
             $this->load->view('templates/footer');
         } else {
+            $id = time();
             $data = [
+                'id' => $id,
                 'soal' => htmlspecialchars($this->input->post('soal'), true),
                 'jawaban_a' => htmlspecialchars($this->input->post('jawaban_a'), true),
                 'jawaban_b' => htmlspecialchars($this->input->post('jawaban_b'), true),
@@ -90,7 +93,11 @@ class Soal extends CI_Controller
                 'jawaban_e' => htmlspecialchars($this->input->post('jawaban_e'), true),
                 'jawaban_yang_benar' => htmlspecialchars($this->input->post('jawaban_yang_benar'), true)
             ];
+            $pembahasan = [
+                'id_soal' => $id
+            ];
             $this->soal->insert($data);
+            $this->pembahasan->insert($pembahasan);
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             Soal baru berhasil ditambahkan
@@ -207,5 +214,59 @@ class Soal extends CI_Controller
             Soal berhasil dihapus
             </div>');
         redirect('soal');
+    }
+
+    public function ubahPembahasan($i)
+    {
+        $id = $i;
+        if ($id == null) {
+            redirect('soal');
+        }
+
+        $user           = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
+        $name           = $user['nama'];
+        $img            = $user['img'];
+        $date_created   = $user['date_created'];
+        $data = [
+            'head'          => 'Ubah Pembahasan',
+            'name'          => $name,
+            'img'           => $img,
+            'date_created'  => $date_created
+        ];
+
+        $data['pembahasan'] = $this->pembahasan->get_where($id);
+        // var_dump($data);
+        // die;
+        $this->load->view('templates/head', $data);
+        $this->load->view('templates/nav', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('soal/pembahasan', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function simpanPembahasan()
+    {
+        $this->form_validation->set_rules('pembahasan', 'Pembahasan', 'trim|required');
+
+        $id = $this->input->post('id');
+        $id_soal = $this->input->post('id_soal');
+
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            Gagal menyimpan, harap periksa kembali
+            </div>');
+            redirect('pembahasan/soal/' . $id_soal);
+        } else {
+            $data = [
+                'pembahasan' => htmlspecialchars($this->input->post('pembahasan'), true),
+            ];
+            $this->pembahasan->update($id, $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Pembahasan untuk soal ' . $id_soal . ' berhasil diubah
+                </div>');
+            redirect('soal');
+        }
     }
 }
