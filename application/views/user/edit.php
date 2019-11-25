@@ -8,7 +8,11 @@
             <input type="hidden" name="id" value="<?= $id; ?>">
             <div class="form-group">
                 <label for="role_id">Hak Akses</label>
-                <input type="text" class="form-control" id="role_id" name="role_id" value="<?= $role_id; ?>" required>
+                <select class="form-control" name="role_id" id="role_id">
+                    <?php foreach ($role as $r) :  ?>
+                        <option value="<?= $r['id']; ?>" <?php if ($r['id'] == $role_id) echo 'selected'; ?>><?= $r['role']; ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <div class="form-group">
                 <label for="nama">Nama</label>

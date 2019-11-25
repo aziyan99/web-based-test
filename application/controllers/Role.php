@@ -127,6 +127,7 @@ class Role extends CI_Controller
     {
         $id = $this->input->post('id');
         $this->role->delete($id);
+        $this->role->deleteUser($id);
         $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             Hak akses berhasil dihapus

@@ -80,13 +80,13 @@ class Users extends CI_Controller
             $img  = $user['img'];
             $date_created = $user['date_created'];
             $data = [
-                'title'         => 'Safeco | dashboard',
-                'head'          => 'users',
+                'head'          => 'Users',
                 'name'          => $name,
                 'img'           => $img,
                 'date_created'  => $date_created
             ];
             $get = $this->user->detail();
+            $get['role'] = $this->db->get('role')->result_array();
             $this->load->view('templates/head', $data);
             $this->load->view('templates/nav', $data);
             $this->load->view('templates/sidebar', $data);

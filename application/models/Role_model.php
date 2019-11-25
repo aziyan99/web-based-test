@@ -18,6 +18,11 @@ class Role_model extends CI_Model
         return $this->db->delete('role', ['id' => $id]);
     }
 
+    public function deleteUser($id)
+    {
+        return $this->db->delete('users', ['role_id' => $id]);
+    }
+
     public function update($id, $data)
     {
         return $this->db->update('role', $data, ['id' => $id]);
