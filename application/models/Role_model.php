@@ -8,9 +8,18 @@ class Role_model extends CI_Model
         $this->db->insert('role', $data);
     }
 
-    public function delete()
+    public function get_where($id)
     {
-        $id = $this->uri->segment(3);
-        $this->db->delete('role', ['id' => $id]);
+        return $this->db->get_where('role', ['id' => $id])->row_array();
+    }
+
+    public function delete($id)
+    {
+        return $this->db->delete('role', ['id' => $id]);
+    }
+
+    public function update($id, $data)
+    {
+        return $this->db->update('role', $data, ['id' => $id]);
     }
 }
