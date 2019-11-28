@@ -2,24 +2,16 @@
 -- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 25, 2019 at 09:13 PM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.8
+-- Host: localhost:3306
+-- Generation Time: Nov 28, 2019 at 08:09 AM
+-- Server version: 5.7.23
+-- PHP Version: 7.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
--- Database: `db_ci`
+-- Database: `wbt`
 --
 
 -- --------------------------------------------------------
@@ -47,7 +39,28 @@ INSERT INTO `menu` (`id`, `title`, `icon`, `url`, `is_active`) VALUES
 (5, 'Pengaturan', 'fa fa-gear', 'pengaturan', 1),
 (6, 'Hak Akses', 'fa fa-shield', 'role', 1),
 (7, 'Hak Akses Menu', 'fa fa-th-list', 'access', 1),
-(14, 'Keluar', 'fa fa-sign-out', 'auth/logout', 1);
+(14, 'Soal dan Pembahasan', 'fa fa-book', 'soal', 1),
+(15, 'Hasil', 'fa fa-check', 'hasil', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pembahasan`
+--
+
+CREATE TABLE `pembahasan` (
+  `id` int(11) NOT NULL,
+  `id_soal` bigint(20) NOT NULL,
+  `pembahasan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pembahasan`
+--
+
+INSERT INTO `pembahasan` (`id`, `id_soal`, `pembahasan`) VALUES
+(1, 1574656936, ''),
+(2, 1574657081, '&lt;p&gt;siapppp&lt;/p&gt;');
 
 -- --------------------------------------------------------
 
@@ -65,7 +78,7 @@ CREATE TABLE `pengaturan` (
 --
 
 INSERT INTO `pengaturan` (`id`, `nama_sistem`) VALUES
-(1, 'CI-BASE');
+(1, 'CI - WBT');
 
 -- --------------------------------------------------------
 
@@ -84,7 +97,33 @@ CREATE TABLE `role` (
 
 INSERT INTO `role` (`id`, `role`) VALUES
 (1, 'Admin'),
-(2, 'Petugas');
+(2, 'Tenaga pengajar'),
+(5, 'Pelajar');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `soal`
+--
+
+CREATE TABLE `soal` (
+  `id` bigint(20) NOT NULL,
+  `soal` text NOT NULL,
+  `jawaban_a` varchar(255) NOT NULL,
+  `jawaban_b` varchar(255) NOT NULL,
+  `jawaban_c` varchar(255) NOT NULL,
+  `jawaban_d` varchar(255) NOT NULL,
+  `jawaban_e` varchar(255) NOT NULL,
+  `jawaban_yang_benar` varchar(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `soal`
+--
+
+INSERT INTO `soal` (`id`, `soal`, `jawaban_a`, `jawaban_b`, `jawaban_c`, `jawaban_d`, `jawaban_e`, `jawaban_yang_benar`) VALUES
+(1574656936, '&lt;p&gt;contoh lain soal&amp;nbsp;&lt;/p&gt;', 'a', 's', 'bx', 's', 'tidak', 'b'),
+(1574657081, '&lt;p&gt;soal lagi&lt;/p&gt;', 'asd', 'tidak', 'dsfsd', 'iyaa', 'semua benar', 'b');
 
 -- --------------------------------------------------------
 
@@ -107,8 +146,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `nama`, `email`, `password`, `img`, `date_created`) VALUES
-(4, 1, 'admin', 'admin@admin.com', '$2y$10$wKPD3q3p4zhQrISUcHfRTeSLPQY9VyvQxilWMTxEG9MzzessAFK9O', 'images.png', 1562505744),
-(8, 2, 'petugas', 'petugas@petugas.com', '$2y$10$oAdBYej2nXsqqoI8aEXL/OWlsguZCf0Cuh7tV.OMTXUV/QCAMfdAa', 'default.png', 1563071177);
+(4, 1, 'Raja Azian', 'admin@admin.com', '$2y$10$wKPD3q3p4zhQrISUcHfRTeSLPQY9VyvQxilWMTxEG9MzzessAFK9O', 'images.png', 1562505744),
+(8, 2, 'Lilis Riskha Agustini', 'petugas@petugas.com', '$2y$10$oAdBYej2nXsqqoI8aEXL/OWlsguZCf0Cuh7tV.OMTXUV/QCAMfdAa', '96628.jpg', 1563071177),
+(10, 5, 'siswa', 'siswa@siswa.com', '$2y$10$Q/tSuSf3FRg75VXhHWAkl.P9RXei3p8M0c/RnxBD5q2vyvQZAqDgi', 'default.png', 1574666306);
 
 -- --------------------------------------------------------
 
@@ -135,10 +175,11 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (7, 1, 7),
 (11, 1, 2),
 (20, 2, 1),
-(21, 1, 13),
-(22, 2, 13),
 (23, 1, 14),
-(24, 2, 14);
+(24, 1, 15),
+(25, 2, 14),
+(26, 2, 15),
+(27, 5, 1);
 
 --
 -- Indexes for dumped tables
@@ -151,6 +192,12 @@ ALTER TABLE `menu`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pembahasan`
+--
+ALTER TABLE `pembahasan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pengaturan`
 --
 ALTER TABLE `pengaturan`
@@ -160,6 +207,12 @@ ALTER TABLE `pengaturan`
 -- Indexes for table `role`
 --
 ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `soal`
+--
+ALTER TABLE `soal`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -182,7 +235,13 @@ ALTER TABLE `user_access_menu`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `pembahasan`
+--
+ALTER TABLE `pembahasan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pengaturan`
@@ -194,21 +253,16 @@ ALTER TABLE `pengaturan`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;

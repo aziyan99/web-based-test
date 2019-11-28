@@ -146,7 +146,7 @@ class Users extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $data = [
-                'role_id'       => 2,
+                'role_id'       => 0,
                 'nama'          => htmlspecialchars($this->input->post('nama'), TRUE),
                 'email'         => htmlspecialchars($this->input->post('email'), TRUE),
                 'password'      => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
