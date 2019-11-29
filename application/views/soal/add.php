@@ -17,6 +17,28 @@
             </div>
         </div>
         <div class="box-body">
+            <div class="row">
+              <div class="col-md-6 col-lg-6 col-xs-6">
+                <div class="form-group">
+                  <label for="kelas">Kelas</label>
+                  <select class="form-control" id="kelas" name="kelas">
+                    <?php  foreach ($kelas as $data): ?>
+                      <option value="<?= $data['id']; ?>"><?= $data['nama_kelas'] ?></option>
+                    <?php endforeach; ?>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-6 col-xs-6">
+                <div class="form-group">
+                  <label for="mata_pelajaran">Mata Peajaran</label>
+                  <select class="form-control" id="mata_pelajaran" name="mata_pelajaran">
+                    <?php foreach ($mata_pelajaran as $data): ?>
+                      <option value="<?= $data['id']; ?>" ><?= $data['nama_mapel'];  ?></option>
+                    <?php endforeach; ?>
+                  </select>
+                </div>
+              </div>
+            </div>
             <div class="form-group">
                 <label for="soal">Soal</label>
                 <textarea name="soal" id="soal" class="form-control" cols="30" rows="10"><?= set_value('soal'); ?></textarea>

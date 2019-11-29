@@ -9,6 +9,8 @@ class Soal extends CI_Controller
         is_logged_in();
         $this->load->model('Soal_model', 'soal');
         $this->load->model('Pembahasan_model', 'pembahasan');
+        $this->load->model('Kelas_model', 'kelas');
+        $this->load->model('Mata_pelajaran_model', 'mata_pelajaran');
         $this->load->library('form_validation');
         $this->load->helper('text');
     }
@@ -46,6 +48,9 @@ class Soal extends CI_Controller
             'img'           => $img,
             'date_created'  => $date_created
         ];
+
+        $data['mata_pelajaran'] = $this->mata_pelajaran->get();
+        $data['kelas'] = $this->kelas->get();
 
         $this->form_validation->set_rules('soal', 'Soal', 'trim|required', [
             'required' => 'Soal tidak boleh kosong'
@@ -91,7 +96,9 @@ class Soal extends CI_Controller
                 'jawaban_c' => htmlspecialchars($this->input->post('jawaban_c'), true),
                 'jawaban_d' => htmlspecialchars($this->input->post('jawaban_d'), true),
                 'jawaban_e' => htmlspecialchars($this->input->post('jawaban_e'), true),
-                'jawaban_yang_benar' => htmlspecialchars($this->input->post('jawaban_yang_benar'), true)
+                'jawaban_yang_benar' => htmlspecialchars($this->input->post('jawaban_yang_benar'), true),
+                'id_kelas' => $this->input->post('kelas'),
+                'id_mata_pelajaran' => $this->input->post('mata_pelajaran')
             ];
             $pembahasan = [
                 'id_soal' => $id
@@ -150,6 +157,8 @@ class Soal extends CI_Controller
             'date_created'  => $date_created
         ];
 
+        $data['kelas'] = $this->kelas->get();
+        $data['mata_pelajaran'] = $this->mata_pelajaran->get();
         $data['soal'] = $this->soal->get_where($id);
         $this->load->view('templates/head', $data);
         $this->load->view('templates/nav', $data);
@@ -193,7 +202,9 @@ class Soal extends CI_Controller
                 'jawaban_c' => htmlspecialchars($this->input->post('jawaban_c'), true),
                 'jawaban_d' => htmlspecialchars($this->input->post('jawaban_d'), true),
                 'jawaban_e' => htmlspecialchars($this->input->post('jawaban_e'), true),
-                'jawaban_yang_benar' => htmlspecialchars($this->input->post('jawaban_yang_benar'), true)
+                'jawaban_yang_benar' => htmlspecialchars($this->input->post('jawaban_yang_benar'), true),
+                'id_kelas' => $this->input->post('kelas'),
+                'id_mata_pelajaran' => $this->input->post('mata_pelajaran')
             ];
             $this->soal->update($id, $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
