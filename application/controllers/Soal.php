@@ -28,7 +28,8 @@ class Soal extends CI_Controller
             'date_created'  => $date_created
         ];
 
-        $data['soal'] = $this->soal->get();
+        $data['mapel'] = $this->mata_pelajaran->get();
+        $data['kelas'] = $this->kelas->get();
         $this->load->view('templates/head', $data);
         $this->load->view('templates/nav', $data);
         $this->load->view('templates/sidebar', $data);
@@ -279,5 +280,31 @@ class Soal extends CI_Controller
                 </div>');
             redirect('soal');
         }
+    }
+
+    public function lihat()
+    {
+        $id_kelas = $this->input->post('id_kelas');
+        $id_mapel = $this->input->post('id_mapel');
+
+        $kelas = $this->kelas->get_where($id_kelas);
+        $mapel = $this->mata_pelajaran->get_where($id_mapel);
+
+        $user           = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
+        $name           = $user['nama'];
+        $img            = $user['img'];
+        $date_created   = $user['date_created'];
+        $data = [
+            'head'          => 'Soal dan pembahasan kelas ' . $kelas['nama_kelas'] . ' mata pelajaran ' . $mapel['nama_mapel'],
+            'name'          => $name,
+            'img'           => $img,
+            'date_created'  => $date_created
+        ];
+        $data['soal'] = $this->soal->mapel_kelas($id_mapel, $id_kelas);
+        $this->load->view('templates/head', $data);
+        $this->load->view('templates/nav', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('soal/semua-soal', $data);
+        $this->load->view('templates/footer');
     }
 }

@@ -31,4 +31,17 @@ class Soal_model extends CI_Model
     {
         return $this->db->delete($this->_table, ['id' => $id]);
     }
+
+    public function get_with_mapel($id)
+    {
+        //$this->db->get_where($this->_table, ['id_mata_pelajaran' => $id])->result_array();
+        $query = "SELECT * FROM `soal` WHERE `id_mata_pelajaran` = $id";
+        return $this->db->query($query)->result_array();
+    }
+
+    public function mapel_kelas($id_mapel, $id_kelas)
+    {
+        $query = "SELECT * FROM `soal` WHERE `id_mata_pelajaran` = $id_mapel AND `id_kelas` = $id_kelas ";
+        return $this->db->query($query)->result_array();
+    }
 }

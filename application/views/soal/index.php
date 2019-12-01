@@ -1,10 +1,5 @@
 <?= $this->session->flashdata('message'); ?>
 <div class="box">
-    <div class="box-body">
-        <a href="<?= base_url('soal/tambah'); ?>" class="btn btn-flat btn-primary"><i class="glyphicon glyphicon-plus"></i> Tambah</a>
-    </div>
-</div>
-<div class="box">
     <div class="box-header">
         <h3 class="box-title">Data Soal dan Pembahasan</h3>
     </div>
@@ -14,27 +9,34 @@
             <thead>
                 <tr>
                     <th width="50">No</th>
-                    <th>Soal</th>
-                    <th width="100">Aksi</th>
+                    <th>Mata Pelajaran</th>
+                    <th width="150">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $x = 1; ?>
-                <?php foreach ($soal as $data) : ?>
+                <?php foreach ($mapel as $data) : ?>
                     <tr>
                         <td><?= $x++ ?></td>
+                        <td><?= $data['nama_mapel'] ?></td>
                         <td>
-                            <?php
-                                $soalB = htmlspecialchars_decode($data['soal']);
-                                $soal = word_limiter($soalB, 4);
-                                echo $soal;
-                                ?>
-                        </td>
-                        <td>
-                            <a href="<?= base_url('pembahasan/soal/') . $data['id']; ?>" class="btn btn-flat btn-xs  btn-primary"><i class="fa fa-file-text-o"></i></a>
-                            <a href="<?= base_url('soal/detail/') . $data['id']; ?>" class="btn btn-flat btn-xs  btn-info"><i class="glyphicon glyphicon-eye-open"></i></a>
-                            <a href="<?= base_url('soal/ubah/') . $data['id']; ?>" class="btn btn-flat btn-xs  btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
-                            <a onclick="return confirm('Hapus soal ini ?' );" href="<?= base_url('soal/hapus/') . $data['id']; ?>" class="btn btn-flat btn-xs  btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                            <form action="<?= base_url('soal/lihat'); ?>" method="post">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 col-sm-6">
+                                        <div class="form-group">
+                                            <input type="hidden" name="id_mapel" value="<?= $data['id']; ?>">
+                                            <select name="id_kelas" id="id_kelas" class="form-control">
+                                                <?php foreach ($kelas as $data) : ?>
+                                                    <option value="<?= $data['id']; ?>"><?= $data['nama_kelas']; ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-6">
+                                        <button type="submit" class="btn btn-primary btn-flat btn-sm">Lihat</button>
+                                    </div>
+                                </div>
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach;  ?>
