@@ -1,4 +1,5 @@
 <?= $this->session->flashdata('message'); ?>
+<?= $pesan; ?>
 <div class="box">
     <div class="box-header">
         <h3 class="box-title">Semua yang kamu punya</h3>

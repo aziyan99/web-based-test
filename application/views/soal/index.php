@@ -10,7 +10,7 @@
                 <tr>
                     <th width="50">No</th>
                     <th>Mata Pelajaran</th>
-                    <th width="150">Aksi</th>
+                    <th width="150">Kelas</th>
                 </tr>
             </thead>
             <tbody>

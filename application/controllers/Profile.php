@@ -169,4 +169,6 @@ class Profile extends CI_Controller
             redirect('profile/image');
         }
     }
+
+    
 }

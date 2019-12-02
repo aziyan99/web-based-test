@@ -8,6 +8,7 @@ class Latihan extends CI_Controller{
  {
    parent::__construct();
    is_logged_in();
+   $this->load->model('Data_diri_model', 'data_diri');
  }
 
  public function index(){
@@ -23,6 +24,20 @@ class Latihan extends CI_Controller{
    ];
 
    //$data['soal'] = $this->soal->get();
+   $id = $this->session->userdata('user_id');
+   $profile = $this->data_diri->get_where($id);
+
+   if(!$profile['nis']){
+     $data['pesan'] = '
+     <div class="alert alert-danger alert-dismissible">
+       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+       Mohon lengkapi data administrasi anda
+     </div>
+     ';
+   }else{
+       $data['pesan'] = '';
+   }
+   
    $this->load->view('templates/head', $data);
    $this->load->view('templates/nav', $data);
    $this->load->view('templates/sidebar', $data);
