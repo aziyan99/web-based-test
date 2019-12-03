@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 03, 2019 at 06:03 AM
+-- Generation Time: Dec 01, 2019 at 07:04 AM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.11
 
@@ -119,8 +119,7 @@ INSERT INTO `menu` (`id`, `title`, `icon`, `url`, `is_active`) VALUES
 (14, 'Soal dan Pembahasan', 'fa fa-book', 'soal', 1),
 (15, 'Hasil', 'fa fa-check', 'hasil', 1),
 (16, 'Soal', 'fa fa-check', 'latihan', 1),
-(17, 'Pengaturan Sekolah', 'fa fa-gears', 'pengaturan_sekolah', 1),
-(18, 'Profile', 'fa fa-address-card', 'data_diri', 1);
+(17, 'Pengaturan Sekolah', 'fa fa-gears', 'pengaturan_sekolah', 1);
 
 -- --------------------------------------------------------
 
@@ -163,26 +162,6 @@ INSERT INTO `pengaturan` (`id`, `nama_sistem`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `profile_siswa`
---
-
-CREATE TABLE `profile_siswa` (
-  `id` bigint(20) NOT NULL,
-  `id_user` bigint(20) NOT NULL,
-  `nis` bigint(20) NOT NULL,
-  `id_kelas` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `profile_siswa`
---
-
-INSERT INTO `profile_siswa` (`id`, `id_user`, `nis`, `id_kelas`) VALUES
-(1, 10, 12311, 2);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `role`
 --
 
@@ -215,8 +194,8 @@ CREATE TABLE `soal` (
   `jawaban_d` varchar(255) NOT NULL,
   `jawaban_e` varchar(255) NOT NULL,
   `jawaban_yang_benar` varchar(2) NOT NULL,
-  `id_mata_pelajaran` bigint(20) NOT NULL,
-  `id_kelas` bigint(20) NOT NULL
+  `id_mata_pelajaran` int(11) NOT NULL,
+  `id_kelas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -224,8 +203,8 @@ CREATE TABLE `soal` (
 --
 
 INSERT INTO `soal` (`id`, `soal`, `jawaban_a`, `jawaban_b`, `jawaban_c`, `jawaban_d`, `jawaban_e`, `jawaban_yang_benar`, `id_mata_pelajaran`, `id_kelas`) VALUES
-(1574656936, '&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed velit diam, semper ut gravida ut, luctus in est. In hac habitasse platea dictumst. Mauris nec molestie leo, non molestie mauris. Suspendisse eget quam urna. Sed non risus et leo commodo fringilla. Etiam id lacinia enim. In pharetra vel justo eget blandit. Vivamus eu tempor felis. Vestibulum commodo ligula viverra neque tempor, vitae accumsan dolor tristique. Mauris suscipit mi lacus, vel fermentum metus bibendum ullamcorper.&lt;/p&gt;', 'a', 's', 'bx', 's', 'tidak', 'b', 2, 2),
-(1574657081, '&lt;p&gt;soal lagi&lt;/p&gt;', 'asd', 'tidak', 'dsfsd', 'iyaa', 'semua benar', 'b', 1, 2);
+(1574656936, '&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed velit diam, semper ut gravida ut, luctus in est. In hac habitasse platea dictumst. Mauris nec molestie leo, non molestie mauris. Suspendisse eget quam urna. Sed non risus et leo commodo fringilla. Etiam id lacinia enim. In pharetra vel justo eget blandit. Vivamus eu tempor felis. Vestibulum commodo ligula viverra neque tempor, vitae accumsan dolor tristique. Mauris suscipit mi lacus, vel fermentum metus bibendum ullamcorper.&lt;/p&gt;', 'a', 's', 'bx', 's', 'tidak', 'b', 1575183071, 1),
+(1574657081, '&lt;p&gt;soal lagi&lt;/p&gt;', 'asd', 'tidak', 'dsfsd', 'iyaa', 'semua benar', 'b', 1575173214, 3);
 
 -- --------------------------------------------------------
 
@@ -278,13 +257,12 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (11, 1, 2),
 (20, 2, 1),
 (23, 1, 14),
+(24, 1, 15),
 (25, 2, 14),
 (26, 2, 15),
 (27, 5, 1),
 (28, 5, 16),
-(29, 1, 17),
-(30, 5, 18),
-(31, 1, 15);
+(29, 1, 17);
 
 --
 -- Indexes for dumped tables
@@ -333,12 +311,6 @@ ALTER TABLE `pengaturan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `profile_siswa`
---
-ALTER TABLE `profile_siswa`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `role`
 --
 ALTER TABLE `role`
@@ -382,7 +354,7 @@ ALTER TABLE `jawaban_siswa`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `pembahasan`
@@ -395,12 +367,6 @@ ALTER TABLE `pembahasan`
 --
 ALTER TABLE `pengaturan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `profile_siswa`
---
-ALTER TABLE `profile_siswa`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -418,7 +384,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
