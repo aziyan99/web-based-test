@@ -1,5 +1,10 @@
 <?= $this->session->flashdata('message'); ?>
 <div class="box">
+    <div class="box-body">
+        <a href="<?= base_url('soal/tambah'); ?>" class="btn btn-flat btn-primary"><i class="glyphicon glyphicon-plus"></i> Tambah</a>
+    </div>
+</div>
+<div class="box">
     <div class="box-header">
         <h3 class="box-title">Data Soal dan Pembahasan</h3>
     </div>
