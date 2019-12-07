@@ -12,6 +12,9 @@ class Latihan extends CI_Controller
     $this->load->model('Data_diri_model', 'data_diri');
     $this->load->model('Latihan_model', 'latihan');
     $this->load->model('Mata_pelajaran_model', 'mapel');
+    $this->load->model('Kelas_model', 'kelas');
+    $this->load->model('Soal_model', 'soal');
+    $this->load->model('Pembahasan_model', 'pembahasan');
   }
 
   public function index()
@@ -134,11 +137,9 @@ class Latihan extends CI_Controller
         </div>');
         redirect('latihan');
       } else {
-        $data['jawaban'] = $this->latihan->get_jawaban($id_mapel);
         $id_user = $this->session->userdata('user_id');
         $kelas = $this->data_diri->get_where($id_user);
         $id_kelas = $kelas['id_kelas'];
-        $data['soal'] = $this->latihan->get_by_kelas($id_kelas, $id_mapel);
         $user           = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
         $name           = $user['nama'];
         $img            = $user['img'];
@@ -149,12 +150,78 @@ class Latihan extends CI_Controller
           'img'           => $img,
           'date_created'  => $date_created
         ];
+        $data['soal'] = $this->latihan->get_by_kelas($id_kelas, $id_mapel);
+        $data['jawaban'] = $this->latihan->get_jawaban($id_mapel);
+        $data['benar'] = $this->latihan->jawaban_benar($id_mapel);
+        $data['salah'] = $this->latihan->jawaban_salah($id_mapel);
         $this->load->view('templates/head', $data);
         $this->load->view('templates/nav', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('latihan-siswa/hasil', $data);
         $this->load->view('templates/footer');
       }
+    }
+  }
+
+  public function detail()
+  {
+    $id_mapel = $this->uri->segment(3);
+    if (!$id_mapel) {
+      redirect('latihan');
+    } else {
+
+      $soal = $this->soal->get_where($id_mapel);
+      $kelas = $this->kelas->get_where($soal['id_kelas']);
+      $mapel = $this->mapel->get_where($soal['id_kelas']);
+
+
+      $user           = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
+      $name           = $user['nama'];
+      $img            = $user['img'];
+      $date_created   = $user['date_created'];
+      $data = [
+        'head'          => 'Soal dan pembahasan id soal ' . $id_mapel . ' mata pelajaran ' . $mapel['nama_mapel'],
+        'name'          => $name,
+        'img'           => $img,
+        'date_created'  => $date_created
+      ];
+
+      $data['pembahasan'] = $this->pembahasan->get_where($id_mapel);
+      $data['soal'] = $this->soal->get_where($id_mapel);
+      $this->load->view('templates/head', $data);
+      $this->load->view('templates/nav', $data);
+      $this->load->view('templates/sidebar', $data);
+      $this->load->view('latihan-siswa/lihat', $data);
+      $this->load->view('templates/footer');
+    }
+  }
+
+  public function generate()
+  {
+    $id_mapel = $this->uri->segment(3);
+    if (!$id_mapel) {
+      redirect('latihan');
+    } else {
+
+      $this->load->library('pdfgenerator');
+      $id_user = $this->session->userdata('user_id');
+      $user = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
+      $mapel = $this->mapel->get_where($id_mapel);
+      $user_d = $this->data_diri->get_where($id_user);
+      $kelas = $this->kelas->get_where($user_d['id_kelas']);
+
+      $data['user'] = [
+        'nama' => $user['nama'],
+        'mapel' => $mapel['nama_mapel'],
+        'kelas' => $kelas['nama_kelas']
+      ];
+
+      $data['benar'] = $this->latihan->jawaban_benar($id_mapel);
+      $data['salah'] = $this->latihan->jawaban_salah($id_mapel);
+
+
+      $html = $this->load->view('pdf/hasil', $data, true);
+      $this->pdfgenerator->generate($html, 'contoh');
     }
   }
 }
