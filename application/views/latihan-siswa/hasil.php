@@ -81,6 +81,7 @@
                                     <td><?= $data['jawaban_yang_benar']; ?></td>
                                     <td>
                                         <a href="<?= base_url('latihan/detail/') . $data['id']; ?>"> <i class="fa fa-external-link"></i> </a>
+
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

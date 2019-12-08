@@ -209,11 +209,15 @@ class Latihan extends CI_Controller
       $mapel = $this->mapel->get_where($id_mapel);
       $user_d = $this->data_diri->get_where($id_user);
       $kelas = $this->kelas->get_where($user_d['id_kelas']);
+      $pengaturan = $this->db->get_where('pengaturan', ['id' => 1])->row_array();
 
       $data['user'] = [
         'nama' => $user['nama'],
         'mapel' => $mapel['nama_mapel'],
-        'kelas' => $kelas['nama_kelas']
+        'kelas' => $kelas['nama_kelas'],
+        'nama_sekolah' => $pengaturan['nama_sekolah'],
+        'alamat' => $pengaturan['alamat'],
+        'nama_sistem' => $pengaturan['nama_sistem']
       ];
 
       $data['benar'] = $this->latihan->jawaban_benar($id_mapel);

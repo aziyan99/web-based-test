@@ -1,22 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 03, 2019 at 06:03 AM
--- Server version: 10.4.10-MariaDB
--- PHP Version: 7.3.11
+-- Host: localhost:3306
+-- Generation Time: Dec 08, 2019 at 11:16 PM
+-- Server version: 5.7.23
+-- PHP Version: 7.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `wbt`
@@ -25,28 +17,38 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `akses_soal`
+-- Table structure for table `jawaban`
 --
 
-CREATE TABLE `akses_soal` (
-  `id` int(11) NOT NULL,
-  `id_soal` int(11) NOT NULL,
-  `id_kelas` int(11) NOT NULL,
-  `id_mata_pelajaran` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `jawaban_siswa`
---
-
-CREATE TABLE `jawaban_siswa` (
-  `id` int(11) NOT NULL,
-  `id_soal` int(11) NOT NULL,
-  `id_siswa` int(11) NOT NULL,
+CREATE TABLE `jawaban` (
+  `id` bigint(11) NOT NULL,
+  `id_soal` bigint(11) NOT NULL,
+  `id_user` bigint(11) NOT NULL,
+  `id_kelas` bigint(20) NOT NULL,
+  `id_mata_pelajaran` bigint(20) NOT NULL,
   `jawaban` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `jawaban`
+--
+
+INSERT INTO `jawaban` (`id`, `id_soal`, `id_user`, `id_kelas`, `id_mata_pelajaran`, `jawaban`) VALUES
+(16, 1575357371, 10, 1, 1, 'c'),
+(17, 1575357451, 10, 1, 1, 'b'),
+(18, 1575357507, 10, 1, 1, 'e'),
+(19, 1575357585, 10, 1, 1, 'e'),
+(20, 1575357643, 10, 1, 1, 'e'),
+(21, 1575357706, 10, 1, 1, 'e'),
+(22, 1575357764, 10, 1, 1, 'e'),
+(23, 1575357845, 10, 1, 1, 'e'),
+(24, 1575357936, 10, 1, 1, 'b'),
+(25, 1575357996, 10, 1, 1, 'c'),
+(26, 1575358067, 10, 1, 1, 'd'),
+(27, 1575358154, 10, 1, 1, 'e'),
+(28, 1575358217, 10, 1, 1, 'e'),
+(30, 1575489362, 10, 1, 2, 'b'),
+(31, 1575490669, 10, 1, 4, 'c');
 
 -- --------------------------------------------------------
 
@@ -120,7 +122,8 @@ INSERT INTO `menu` (`id`, `title`, `icon`, `url`, `is_active`) VALUES
 (15, 'Hasil', 'fa fa-check', 'hasil', 1),
 (16, 'Soal', 'fa fa-check', 'latihan', 1),
 (17, 'Pengaturan Sekolah', 'fa fa-gears', 'pengaturan_sekolah', 1),
-(18, 'Profile', 'fa fa-address-card', 'data_diri', 1);
+(18, 'Profile', 'fa fa-address-card', 'data_diri', 1),
+(19, 'Keluar', 'fa fa-sign-out', 'auth/logout', 1);
 
 -- --------------------------------------------------------
 
@@ -140,7 +143,23 @@ CREATE TABLE `pembahasan` (
 
 INSERT INTO `pembahasan` (`id`, `id_soal`, `pembahasan`) VALUES
 (1, 1574656936, '&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed velit diam, semper ut gravida ut, luctus in est. In hac habitasse platea dictumst. Mauris nec molestie leo, non molestie mauris. Suspendisse eget quam urna. Sed non risus et leo commodo fringilla. Etiam id lacinia enim. In pharetra vel justo eget blandit. Vivamus eu tempor felis. Vestibulum commodo ligula viverra neque tempor, vitae accumsan dolor tristique. Mauris suscipit mi lacus, vel fermentum metus bibendum ullamcorper.&lt;/p&gt;'),
-(2, 1574657081, '&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed velit diam, semper ut gravida ut, luctus in est. In hac habitasse platea dictumst. Mauris nec molestie leo, non molestie mauris. Suspendisse eget quam urna. Sed non risus et leo commodo fringilla. Etiam id lacinia enim. In pharetra vel justo eget blandit. Vivamus eu tempor felis. Vestibulum commodo ligula viverra neque tempor, vitae accumsan dolor tristique. Mauris suscipit mi lacus, vel fermentum metus bibendum ullamcorper.&lt;/p&gt;');
+(2, 1574657081, '&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed velit diam, semper ut gravida ut, luctus in est. In hac habitasse platea dictumst. Mauris nec molestie leo, non molestie mauris. Suspendisse eget quam urna. Sed non risus et leo commodo fringilla. Etiam id lacinia enim. In pharetra vel justo eget blandit. Vivamus eu tempor felis. Vestibulum commodo ligula viverra neque tempor, vitae accumsan dolor tristique. Mauris suscipit mi lacus, vel fermentum metus bibendum ullamcorper.&lt;/p&gt;'),
+(3, 1575357371, '&lt;p&gt;ini pembahasan&lt;/p&gt;'),
+(4, 1575357451, '&lt;p&gt;ini pembahasan&lt;/p&gt;'),
+(5, 1575357507, '&lt;p&gt;ini pembahasan&lt;/p&gt;'),
+(6, 1575357585, ''),
+(7, 1575357643, ''),
+(8, 1575357706, ''),
+(9, 1575357764, ''),
+(10, 1575357845, ''),
+(11, 1575357936, ''),
+(12, 1575357996, ''),
+(13, 1575358067, ''),
+(14, 1575358154, ''),
+(15, 1575358217, ''),
+(16, 1575489362, ''),
+(17, 1575490669, ''),
+(18, 1575494011, '');
 
 -- --------------------------------------------------------
 
@@ -150,15 +169,29 @@ INSERT INTO `pembahasan` (`id`, `id_soal`, `pembahasan`) VALUES
 
 CREATE TABLE `pengaturan` (
   `id` int(11) NOT NULL,
-  `nama_sistem` varchar(255) NOT NULL
+  `nama_sistem` varchar(255) NOT NULL,
+  `nama_sekolah` varchar(180) NOT NULL,
+  `alamat` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pengaturan`
 --
 
-INSERT INTO `pengaturan` (`id`, `nama_sistem`) VALUES
-(1, 'CI - WBT');
+INSERT INTO `pengaturan` (`id`, `nama_sistem`, `nama_sekolah`, `alamat`) VALUES
+(1, 'CI - WBT', 'SMA N 4 KUNDUR', 'Jalan Besar Pendidikan Layang Kobel KM 34 Kundur Barat');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pengumuman`
+--
+
+CREATE TABLE `pengumuman` (
+  `id` bigint(20) NOT NULL,
+  `pengumuman` text NOT NULL,
+  `tujuan` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -178,7 +211,7 @@ CREATE TABLE `profile_siswa` (
 --
 
 INSERT INTO `profile_siswa` (`id`, `id_user`, `nis`, `id_kelas`) VALUES
-(1, 10, 12311, 2);
+(1, 10, 12311, 1);
 
 -- --------------------------------------------------------
 
@@ -225,7 +258,23 @@ CREATE TABLE `soal` (
 
 INSERT INTO `soal` (`id`, `soal`, `jawaban_a`, `jawaban_b`, `jawaban_c`, `jawaban_d`, `jawaban_e`, `jawaban_yang_benar`, `id_mata_pelajaran`, `id_kelas`) VALUES
 (1574656936, '&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed velit diam, semper ut gravida ut, luctus in est. In hac habitasse platea dictumst. Mauris nec molestie leo, non molestie mauris. Suspendisse eget quam urna. Sed non risus et leo commodo fringilla. Etiam id lacinia enim. In pharetra vel justo eget blandit. Vivamus eu tempor felis. Vestibulum commodo ligula viverra neque tempor, vitae accumsan dolor tristique. Mauris suscipit mi lacus, vel fermentum metus bibendum ullamcorper.&lt;/p&gt;', 'a', 's', 'bx', 's', 'tidak', 'b', 2, 2),
-(1574657081, '&lt;p&gt;soal lagi&lt;/p&gt;', 'asd', 'tidak', 'dsfsd', 'iyaa', 'semua benar', 'b', 1, 2);
+(1574657081, '&lt;p&gt;soal lagi&lt;/p&gt;', 'asd', 'tidak', 'dsfsd', 'iyaa', 'semua benar', 'b', 1, 2),
+(1575357371, '&lt;p&gt;Jenis pengembangan teks eksposisi yang rinciannya tergolong dalam suatu objek ke dalam bagian-bagian itu disebut jenis pengembangan &amp;hellip;.&lt;/p&gt;', 'definisi', 'verifikasi', 'klasifikasi', 'aktualisasi', 'analisis', 'c', 1, 1),
+(1575357451, '&lt;p&gt;Sebuah karangan yang mengandung informasi atau pengetahuan disebut &amp;hellip;.&lt;/p&gt;', 'karangan teks eksposisi', 'karangan teks ilmiah', 'karangan teks skripsi', 'karangan teks penelitian', 'x', 'a', 1, 1),
+(1575357507, '&lt;p&gt;Sebuah kata ganti orang yang dapat digunakan terutama pada saat pernyataan pendapat pribadi diungkapkan disebut &amp;hellip;.&lt;/p&gt;', 'leksial', 'klasikal', 'konjugsi', 'pronomina', 'pertamina', 'd', 1, 1),
+(1575357585, '&lt;p&gt;Dalam jenis karangan teks eksposisi, terdapat jenis yang memiliki pengertian sebagai pemapar atau penjelas dari defini suatu topik tertentu disebut &amp;hellip;.&lt;/p&gt;', 'teks eksposisi proses', 'teks eksposisi definisi', 'teks eksposisi laporan', 'teks eksposisi ilustrasi', 'teks terserah (cewe)', 'b', 1, 1),
+(1575357643, '&lt;p&gt;Berikut ini adalah struktur lain yang ada dalam teks laporan observasi, kecuali &amp;hellip;&lt;/p&gt;', 'definisi pembuka', 'definisi umum', 'definisi penutup', 'definisi bagian', 'definisi sifat kamu :v', 'a', 1, 1),
+(1575357706, '&lt;p&gt;Tujuan dari teks laporan obeservasi adalah &amp;hellip;&lt;/p&gt;', 'Menemukan teknik atau cara terbaru', 'sebagai bahan penelitian ilmiah', 'mencari sampel masalah', 'jawaban a, b dan c benar semua', 'tidak ada jawaban benar karena soal salah', 'a', 1, 1),
+(1575357764, '&lt;p&gt;Jenis-jenis kalimat yang biasa digunakan dalam pembuatan teks laporan hasil observasi, kecuali&amp;hellip;.&lt;/p&gt;', 'kalimat deskripsi', 'kalimat simple', 'kalimat kompleks', 'kalimat tanya', 'kalimat \"TERSERAH\"', 'd', 1, 1),
+(1575357845, '&lt;p&gt;Bacalah teks berikut dengan cermat!&lt;/p&gt;\r\n\r\n&lt;p&gt;Air yang berasal dari laut dan tumbuhan dapat diuapkan oleh sinar matahari. Setelah diuapkan, hasil uapan tersebut akan naik keatas sehingga terjadinya penggumpalan uap air yang biasa disebut awan. Kemudia awan akan menurunkan air hujan dengan bantuan angin. Air yang turun kemudian akan diresap oleh tanah, sehingga sebagian ada yang menjadi cadangan dalam tanah dan sebagian lagi menuju permukaan laut. Kondisi ini terjadi berulang-ulang terus dengan cara yang sama.&lt;/p&gt;\r\n\r\n&lt;p&gt;Teks diatas adalah merupakan contoh dari teks &amp;hellip;.&lt;/p&gt;', 'teks deskripsi', 'teks laporan ilmiah', 'teks laporan observasi', 'teks laporan eksposisi', 'teks skripsi', 'd', 1, 1),
+(1575357936, '&lt;p&gt;Salah satu fungsi dari hasil teks laporan obeservasi adalah &amp;hellip;.&lt;/p&gt;', 'merupakan pembukaan awal untuk mencari informasi', 'bukan sumber informasi utama', 'merupakan bahan untuk pendokumentasian', 'merupakan hasil analisis dari teks laporan', 'supaya keren dan cool', 'c', 1, 1),
+(1575357996, '&lt;p&gt;Informasi yang dihadirkan dari hasil observasi dan analisis secara sistematis adalah &amp;hellip;.&lt;/p&gt;', 'teks observasi', 'teks definisi', 'teks kesimpulan', 'teks hasil laporan', 'cara memahami wanita ceunahh', 'd', 1, 1),
+(1575358067, '&lt;p&gt;Dalam pembuatan teks laporan, kita harus memperhatikan salah satunya tentang aspek kebahasaan, seperti dalam penggunaan &amp;hellip;.&lt;/p&gt;', 'kelas kata', 'kalimat', 'hubungan antarkalimat', 'hubungan antarparagraf', 'bahasa tanpa kata \"TERSERAH\"', 'a', 1, 1),
+(1575358154, '&lt;p&gt;Salah satu tujuan seorang penulis menggunakan tabel dalam tulisannya yaitu &amp;hellip;.&lt;/p&gt;', 'sebagai penerang bahwa kejadian benar-benar ada', 'sebagai penguat atas bukti bahwa peristiwa benar-benar terjadi', 'sebagai bahan untuk bisa meyakinkan suatu pendapat', 'sebagai gambaran suatu keadaan sebagaimana yang benar-benar terjadi', 'menghindari kalimat \"TERSERAH\" wanita', 'd', 1, 1),
+(1575358217, '&lt;p&gt;Teks eksposisi dapat kita jumpai pada media-media salah satunya yaitu &amp;hellip;.&lt;/p&gt;', 'televisi', 'koran', 'radio', 'handphone', 'buaya darat yang selalu bilang, cuma ada kamu kok', 'b', 1, 1),
+(1575489362, '&lt;p&gt;Ini soal matematika&lt;/p&gt;', 'oke', 'ada deh', 'iya', 'oke lagi', 'yes', 'd', 2, 1),
+(1575490669, '&lt;p&gt;Ini soal fisika&lt;/p&gt;', 'a', 'a', 'a', 'b', 's', 'a', 4, 1),
+(1575494011, '&lt;p&gt;soal kimia kelas 11&lt;/p&gt;', 'ok', 'ok', 'ok', 'ok', 'ok', 'b', 1575173214, 2);
 
 -- --------------------------------------------------------
 
@@ -250,7 +299,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `role_id`, `nama`, `email`, `password`, `img`, `date_created`) VALUES
 (4, 1, 'Raja Azian', 'admin@admin.com', '$2y$10$wKPD3q3p4zhQrISUcHfRTeSLPQY9VyvQxilWMTxEG9MzzessAFK9O', 'images.png', 1562505744),
 (8, 2, 'Lilis Riskha Agustini', 'petugas@petugas.com', '$2y$10$oAdBYej2nXsqqoI8aEXL/OWlsguZCf0Cuh7tV.OMTXUV/QCAMfdAa', '96628.jpg', 1563071177),
-(10, 5, 'siswa', 'siswa@siswa.com', '$2y$10$Q/tSuSf3FRg75VXhHWAkl.P9RXei3p8M0c/RnxBD5q2vyvQZAqDgi', 'default.png', 1574666306);
+(10, 5, 'Raja Azian', 'siswa@siswa.com', '$2y$10$Q/tSuSf3FRg75VXhHWAkl.P9RXei3p8M0c/RnxBD5q2vyvQZAqDgi', 'default.png', 1574666306);
 
 -- --------------------------------------------------------
 
@@ -284,22 +333,20 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (28, 5, 16),
 (29, 1, 17),
 (30, 5, 18),
-(31, 1, 15);
+(31, 1, 15),
+(32, 2, 19),
+(33, 5, 19),
+(34, 1, 19),
+(35, 2, 17);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `akses_soal`
+-- Indexes for table `jawaban`
 --
-ALTER TABLE `akses_soal`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `jawaban_siswa`
---
-ALTER TABLE `jawaban_siswa`
+ALTER TABLE `jawaban`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -330,6 +377,12 @@ ALTER TABLE `pembahasan`
 -- Indexes for table `pengaturan`
 --
 ALTER TABLE `pengaturan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pengumuman`
+--
+ALTER TABLE `pengumuman`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -367,34 +420,34 @@ ALTER TABLE `user_access_menu`
 --
 
 --
--- AUTO_INCREMENT for table `akses_soal`
+-- AUTO_INCREMENT for table `jawaban`
 --
-ALTER TABLE `akses_soal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `jawaban_siswa`
---
-ALTER TABLE `jawaban_siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `jawaban`
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `pembahasan`
 --
 ALTER TABLE `pembahasan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `pengaturan`
 --
 ALTER TABLE `pengaturan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `pengumuman`
+--
+ALTER TABLE `pengumuman`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `profile_siswa`
@@ -418,9 +471,4 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;

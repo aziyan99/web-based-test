@@ -59,9 +59,9 @@
 <body>
     <div class="head">
         <div class="title">
-            <h3>CI WBT</h3>
-            <h4>SMA N 4 Kundur</h4>
-            <p>Jalan Besar Pendidikan layang kobel </p>
+            <h3><?= $user['nama_sistem']; ?></h3>
+            <h4><?= $user['nama_sekolah']; ?></h4>
+            <p><?= $user['alamat']; ?></p>
         </div>
         <hr>
         <br>

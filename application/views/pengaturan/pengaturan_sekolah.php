@@ -31,7 +31,7 @@
                 <td>3</td>
                 <td>Administrasi Sekolah</td>
                 <td>
-                  <a href="#" class="btn btn-primary btn-sm btn-flat"> <i class="fa fa-gear"></i> </a>
+                  <a href="<?= base_url('pengaturan_sekolah/administrasi_sekolah'); ?>" class="btn btn-primary btn-sm btn-flat"> <i class="fa fa-gear"></i> </a>
                 </td>
               </tr>
             </tbody>
