@@ -4,7 +4,7 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg">Silahkan masuk ke sistem</p>
         <?= validation_errors(
             '<div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>',
@@ -18,7 +18,7 @@
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" name="password" placeholder="Password">
+                <input type="password" class="form-control" name="password" placeholder="Kata Sandi">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
@@ -29,7 +29,7 @@
                 <!-- /.col -->
             </div>
         </form>
-        <a href="<?= base_url('auth/register'); ?>" class="text-center">Register a new membership</a>
+        Belum punya akun ? daftar <a href="<?= base_url('auth/register'); ?>" class="text-center">disini</a>
 
     </div>
     <!-- /.login-box-body -->

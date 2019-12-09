@@ -18,6 +18,8 @@ class User_model extends CI_Model
     public function hapus()
     {
         $id = $this->uri->segment(3);
+        $this->db->delete('jawaban', ['id_user' => $id]);
+        $this->db->delete('profile_siswa', ['id_user' => $id]);
         $this->db->delete('users', ['id' => $id]);
     }
 

@@ -42,4 +42,9 @@ class Latihan_model extends CI_Model
         $query = "SELECT `jwb`.`jawaban`, `sl`.`jawaban_yang_benar` FROM jawaban jwb JOIN soal sl WHERE `jwb`.`id_user`=$id_user AND `sl`.`id` = `jwb`.`id_soal` AND `sl`.`jawaban_yang_benar`!=`jwb`.`jawaban` AND `jwb`.`id_mata_pelajaran`=$id_mapel";
         return $this->db->query($query)->result_array();
     }
+
+    public function cek_jawaban_kosong($id_user)
+    {
+        return $this->db->get_where('jawaban', ['id_user' => $id_user])->result_array();
+    }
 }

@@ -1,10 +1,10 @@
 <div class="register-box">
     <div class="register-logo">
-        <a href="#"><b><?= $nama['nama_sistem']; ?></b></a>
+        <a href="#"><?= $nama['nama_sistem']; ?></a>
     </div>
 
     <div class="register-box-body">
-        <p class="login-box-msg">Register a new membership</p>
+        <p class="login-box-msg">Daftar akun baru</p>
         <?= validation_errors(
             '<div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>',
@@ -30,12 +30,12 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Daftar</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
-        <a href="<?= base_url('auth'); ?>" class="text-center">I already have a membership</a>
+        Sudah punya akun? masuk<a href="<?= base_url('auth'); ?>" class="text-center"> disini</a>
     </div>
     <!-- /.form-box -->
 </div>

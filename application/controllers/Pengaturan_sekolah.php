@@ -19,11 +19,11 @@ class Pengaturan_sekolah extends CI_Controller
         $img            = $user['img'];
         $date_created   = $user['date_created'];
         $data = [
-        'head'          => 'Pengaturan Sekolah',
-        'name'          => $name,
-        'img'           => $img,
-        'date_created'  => $date_created
-    ];
+            'head'          => 'Pengaturan Sekolah',
+            'name'          => $name,
+            'img'           => $img,
+            'date_created'  => $date_created
+        ];
 
         $this->load->view('templates/head', $data);
         $this->load->view('templates/nav', $data);
@@ -32,18 +32,18 @@ class Pengaturan_sekolah extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function kelas($type='index')
+    public function kelas($type = 'index')
     {
         $user           = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
         $name           = $user['nama'];
         $img            = $user['img'];
         $date_created   = $user['date_created'];
         $data = [
-        'head'          => 'Pengaturan Kelas',
-        'name'          => $name,
-        'img'           => $img,
-        'date_created'  => $date_created
-    ];
+            'head'          => 'Pengaturan Kelas',
+            'name'          => $name,
+            'img'           => $img,
+            'date_created'  => $date_created
+        ];
 
         if ($type === 'index') {
             $data['kelas'] = $this->kelas->get();
@@ -52,7 +52,7 @@ class Pengaturan_sekolah extends CI_Controller
             $this->load->view('templates/sidebar', $data);
             $this->load->view('pengaturan/kelas', $data);
             $this->load->view('templates/footer');
-        } elseif ($type == $this->uri->segment(3)) {
+        } elseif ($type === 'ubah') {
             $id = $this->uri->segment(4);
             $data['kelas'] = $this->kelas->get();
             $data['kelas_where'] = $this->kelas->get_where($id);
@@ -63,15 +63,15 @@ class Pengaturan_sekolah extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $data = [
-        'id' => time(),
-        'nama_kelas' => $this->input->post('nama_kelas')
-      ];
+                'id' => time(),
+                'nama_kelas' => $this->input->post('nama_kelas')
+            ];
 
             $this->kelas->insert($data);
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-      Kelas berhasil ditambah
-      </div>');
+             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+             Kelas berhasil ditambah
+             </div>');
             redirect('pengaturan_sekolah/kelas');
         }
     }
@@ -88,8 +88,8 @@ class Pengaturan_sekolah extends CI_Controller
         }
 
         $data = [
-      'nama_kelas' => htmlspecialchars($this->input->post('nama_kelas'), true)
-    ];
+            'nama_kelas' => htmlspecialchars($this->input->post('nama_kelas'), true)
+        ];
 
         $this->kelas->update($id, $data);
         $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
@@ -121,11 +121,11 @@ class Pengaturan_sekolah extends CI_Controller
         $img            = $user['img'];
         $date_created   = $user['date_created'];
         $data = [
-        'head'          => 'Pengaturan mata pelajaran',
-        'name'          => $name,
-        'img'           => $img,
-        'date_created'  => $date_created
-    ];
+            'head'          => 'Pengaturan mata pelajaran',
+            'name'          => $name,
+            'img'           => $img,
+            'date_created'  => $date_created
+        ];
 
         $data['mapel'] = $this->mapel->get();
         $this->load->view('templates/head', $data);
@@ -146,9 +146,9 @@ class Pengaturan_sekolah extends CI_Controller
             redirect('pengaturan_sekolah/mata_pelajaran');
         } else {
             $data = [
-        'id' => time(),
-        'nama_mapel' => $nama_mapel
-      ];
+                'id' => time(),
+                'nama_mapel' => $nama_mapel
+            ];
             $this->mapel->insert($data);
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -169,11 +169,11 @@ class Pengaturan_sekolah extends CI_Controller
             $img            = $user['img'];
             $date_created   = $user['date_created'];
             $data = [
-          'head'          => 'Pengaturan mata pelajaran',
-          'name'          => $name,
-          'img'           => $img,
-          'date_created'  => $date_created
-      ];
+                'head'          => 'Pengaturan mata pelajaran',
+                'name'          => $name,
+                'img'           => $img,
+                'date_created'  => $date_created
+            ];
 
             $data['mapel'] = $this->mapel->get();
             $data['mapel_where'] = $this->mapel->get_where($id);
@@ -197,8 +197,8 @@ class Pengaturan_sekolah extends CI_Controller
             redirect('pengaturan_sekolah/mata_pelajaran');
         } else {
             $data = [
-        'nama_mapel' => $mapel
-      ];
+                'nama_mapel' => $mapel
+            ];
             $this->mapel->update($id, $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -234,42 +234,40 @@ class Pengaturan_sekolah extends CI_Controller
         $img            = $user['img'];
         $date_created   = $user['date_created'];
         $data = [
-        'head'          => 'Pengaturan administrasi sekolah',
-        'name'          => $name,
-        'img'           => $img,
-        'date_created'  => $date_created
-    ];
+            'head'          => 'Pengaturan administrasi sekolah',
+            'name'          => $name,
+            'img'           => $img,
+            'date_created'  => $date_created
+        ];
 
         $this->form_validation->set_rules('nama_sekolah', 'Nama Sekolah', 'trim|required', [
-          'required' => 'Nama sekolah tidak boleh kosong'
+            'required' => 'Nama sekolah tidak boleh kosong'
         ]);
 
         $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required', [
-          'required' => 'Alamat sekolah tidak boleh kosong'
+            'required' => 'Alamat sekolah tidak boleh kosong'
         ]);
 
-        if($this->form_validation->run() == false){
-          $data['sekolah'] = $this->db->get_where('pengaturan', ['id' => 1])->row_array();
-          $this->load->view('templates/head', $data);
-          $this->load->view('templates/nav', $data);
-          $this->load->view('templates/sidebar', $data);
-          $this->load->view('pengaturan/administrasi_sekolah', $data);
-          $this->load->view('templates/footer');
-        }else{
-          $data = [
-            'nama_sekolah' => htmlspecialchars($this->input->post('nama_sekolah'), true),
-            'alamat' => htmlspecialchars($this->input->post('alamat'), true)
-          ];
+        if ($this->form_validation->run() == false) {
+            $data['sekolah'] = $this->db->get_where('pengaturan', ['id' => 1])->row_array();
+            $this->load->view('templates/head', $data);
+            $this->load->view('templates/nav', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('pengaturan/administrasi_sekolah', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'nama_sekolah' => htmlspecialchars($this->input->post('nama_sekolah'), true),
+                'alamat' => htmlspecialchars($this->input->post('alamat'), true)
+            ];
 
-          $this->db->update('pengaturan', $data, ['id' => 1]);
-          $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
+            $this->db->update('pengaturan', $data, ['id' => 1]);
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
           Administrasi Sekolah berhasil diubah
           </div>');
 
-          redirect('pengaturan_sekolah/administrasi_sekolah');
+            redirect('pengaturan_sekolah/administrasi_sekolah');
         }
-
-
     }
 }

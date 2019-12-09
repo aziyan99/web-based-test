@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Data_diri extends CI_Controller{
+class Data_diri extends CI_Controller
+{
 
   public function __construct()
   {
@@ -18,37 +19,35 @@ class Data_diri extends CI_Controller{
     $img  = $user['img'];
     $date_created = $user['date_created'];
     $data = [
-        'head'          => 'Data Administrasi',
-        'name'          => $name,
-        'img'           => $img,
-        'date_created'  => $date_created
+      'head'          => 'Data Administrasi',
+      'name'          => $name,
+      'img'           => $img,
+      'date_created'  => $date_created
     ];
 
     $data['kelas'] = $this->kelas->get();
     $id = $this->session->userdata('user_id');
     $profile = $this->data_diri->get_where($id);
 
-    if(!$profile){
+    if (!$profile) {
       $data_adm = [
         'id_user' => $id
       ];
       $this->data_diri->insert($data_adm);
-    }else{
+    } else {
 
-      if(!$profile['nis']){
+      if (!$profile['nis']) {
         $data['pesan'] = '
         <div class="alert alert-danger alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
           Mohon lengkapi data administrasi anda
         </div>
         ';
-      }else{
-          $data['pesan'] = '';
+      } else {
+        $data['pesan'] = '';
       }
-
-
     }
-
+    $data['pesan'] = $data['pesan'];
     $data['profile'] = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
     $data['adm'] = $profile;
     $this->load->view('templates/head');
@@ -65,7 +64,7 @@ class Data_diri extends CI_Controller{
     $this->form_validation->set_rules('nis', 'Nim', 'trim|required|numeric');
     $this->form_validation->set_rules('id_kelas', 'Id kelas', 'trim|required');
 
-    if($this->form_validation->run() == false){
+    if ($this->form_validation->run() == false) {
       $this->session->set_flashdata('message', '
       <div class="alert alert-danger alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -74,7 +73,7 @@ class Data_diri extends CI_Controller{
       ');
 
       redirect('data_diri');
-    }else{
+    } else {
       $id = htmlspecialchars($this->input->post('id'), true);
       $data = [
         'nis' => htmlspecialchars($this->input->post('nis'), true),
@@ -90,8 +89,6 @@ class Data_diri extends CI_Controller{
       ');
 
       redirect('data_diri');
-
     }
   }
-
 }

@@ -95,7 +95,7 @@ class Auth extends CI_Controller
             $this->load->view('templates/auth_foot');
         } else {
             $data = [
-                'role_id'       => 0,
+                'role_id'       => 5,
                 'nama'          => htmlspecialchars($this->input->post('nama'), TRUE),
                 'email'         => htmlspecialchars($this->input->post('email'), TRUE),
                 'password'      => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),

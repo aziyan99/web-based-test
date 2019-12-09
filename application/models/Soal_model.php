@@ -29,7 +29,9 @@ class Soal_model extends CI_Model
 
     public function delete($id)
     {
-        return $this->db->delete($this->_table, ['id' => $id]);
+        $this->db->delete('pembahasan', ['id_soal' => $id]);
+        $this->db->delete($this->_table, ['id' => $id]);
+        return true;
     }
 
     public function get_with_mapel($id)

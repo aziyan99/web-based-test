@@ -137,28 +137,37 @@ class Latihan extends CI_Controller
         </div>');
         redirect('latihan');
       } else {
-        $id_user = $this->session->userdata('user_id');
-        $kelas = $this->data_diri->get_where($id_user);
-        $id_kelas = $kelas['id_kelas'];
-        $user           = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
-        $name           = $user['nama'];
-        $img            = $user['img'];
-        $date_created   = $user['date_created'];
-        $data = [
-          'head'          => 'Hasil',
-          'name'          => $name,
-          'img'           => $img,
-          'date_created'  => $date_created
-        ];
-        $data['soal'] = $this->latihan->get_by_kelas($id_kelas, $id_mapel);
-        $data['jawaban'] = $this->latihan->get_jawaban($id_mapel);
-        $data['benar'] = $this->latihan->jawaban_benar($id_mapel);
-        $data['salah'] = $this->latihan->jawaban_salah($id_mapel);
-        $this->load->view('templates/head', $data);
-        $this->load->view('templates/nav', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('latihan-siswa/hasil', $data);
-        $this->load->view('templates/footer');
+        $cek = $this->latihan->cek_jawaban_kosong($id_user);
+        if ($cek) {
+          $id_user = $this->session->userdata('user_id');
+          $kelas = $this->data_diri->get_where($id_user);
+          $id_kelas = $kelas['id_kelas'];
+          $user           = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
+          $name           = $user['nama'];
+          $img            = $user['img'];
+          $date_created   = $user['date_created'];
+          $data = [
+            'head'          => 'Hasil',
+            'name'          => $name,
+            'img'           => $img,
+            'date_created'  => $date_created
+          ];
+          $data['soal'] = $this->latihan->get_by_kelas($id_kelas, $id_mapel);
+          $data['jawaban'] = $this->latihan->get_jawaban($id_mapel);
+          $data['benar'] = $this->latihan->jawaban_benar($id_mapel);
+          $data['salah'] = $this->latihan->jawaban_salah($id_mapel);
+          $this->load->view('templates/head', $data);
+          $this->load->view('templates/nav', $data);
+          $this->load->view('templates/sidebar', $data);
+          $this->load->view('latihan-siswa/hasil', $data);
+          $this->load->view('templates/footer');
+        } else {
+          $this->session->set_flashdata('message', '<div class="alert alert-info alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            Kamu belum mengerjakan latihan ini
+          </div>');
+          redirect('latihan');
+        }
       }
     }
   }
