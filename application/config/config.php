@@ -23,7 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost.192.168.43.160.xip.io/web-based-test/';
+$config['base_url'] = 'http://localhost/web-based-test/';
 
 /*
 |--------------------------------------------------------------------------
