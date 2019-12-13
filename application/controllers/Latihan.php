@@ -78,6 +78,7 @@ class Latihan extends CI_Controller
         $result = $this->latihan->get_jawaban($id_mapel);
         if (!$result) {
           $data['soal'] = $this->latihan->get_by_kelas($id_kelas, $id_mapel);
+          $data['pengaturan'] = $this->db->get_where('pengaturan', ['id' => 1])->row_array();
           $this->load->view('latihan-siswa/latihan', $data);
         } else {
           $this->session->set_flashdata('message', '<div class="alert alert-info alert-dismissible">

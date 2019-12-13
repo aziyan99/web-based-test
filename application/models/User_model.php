@@ -9,6 +9,19 @@ class User_model extends CI_Model
         return $this->db->get_where('users', ['id' => $id])->row_array();
     }
 
+    public function get_admin()
+    {
+        return $this->db->get_where('users', ['role_id' => 1])->result_array();
+    }
+    public function get_tenaga_pengajar()
+    {
+        return $this->db->get_where('users', ['role_id' => 2])->result_array();
+    }
+    public function get_siswa()
+    {
+        return $this->db->get_where('users', ['role_id' => 5])->result_array();
+    }
+
     public function update($data)
     {
         $id = $this->input->post('id');

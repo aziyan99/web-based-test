@@ -25,9 +25,15 @@
                         <td><?= $m['title']; ?></td>
                         <td><?= $m['icon']; ?>-<i class="<?= $m['icon']; ?>"></i></td>
                         <td><?= $m['url']; ?></td>
-                        <td><?= $m['is_active']; ?></td>
                         <td>
-                            <a onclick="return alert('Fitur ini akan segera ditambahkan ? ');"  href="#" class="btn btn-flat btn-xs  btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                            <?php if ($m['is_active'] != 1) : ?>
+                                <span class="badge">Tidak Aktif</span>
+                            <?php else : ?>
+                                <span class="badge">Aktif</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <a onclick="return alert('Fitur ini akan segera ditambahkan ? ');" href="#" class="btn btn-flat btn-xs  btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
                             <a onclick="return alert('Fitur ini akan segera ditambahkan ? ');" href="#" class="btn btn-flat btn-xs  btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                         </td>
                     </tr>

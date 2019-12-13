@@ -25,13 +25,16 @@ class Users extends CI_Controller
         $img  = $user['img'];
         $date_created = $user['date_created'];
         $data = [
-            'head'          => 'Users',
+            'head'          => 'Pengguna Sistem',
             'name'          => $name,
             'img'           => $img,
             'date_created'  => $date_created
         ];
 
         $data['user'] = $this->db->get('users')->result_array();
+        $data['admin'] = $this->user->get_admin();
+        $data['tenaga_pengajar'] = $this->user->get_tenaga_pengajar();
+        $data['siswa'] = $this->user->get_siswa();
 
         $this->load->view('templates/head', $data);
         $this->load->view('templates/nav', $data);
@@ -48,7 +51,7 @@ class Users extends CI_Controller
         $date_created = $user['date_created'];
         $data = [
             'title'         => 'Safeco | dashboard',
-            'head'          => 'users',
+            'head'          => 'Detil Pengguna',
             'name'          => $name,
             'img'           => $img,
             'date_created'  => $date_created
@@ -80,7 +83,7 @@ class Users extends CI_Controller
             $img  = $user['img'];
             $date_created = $user['date_created'];
             $data = [
-                'head'          => 'Users',
+                'head'          => 'Ubah Pengguna',
                 'name'          => $name,
                 'img'           => $img,
                 'date_created'  => $date_created
@@ -115,8 +118,7 @@ class Users extends CI_Controller
         $img  = $user['img'];
         $date_created = $user['date_created'];
         $data = [
-            'title'         => 'Safeco | dashboard',
-            'head'          => 'users',
+            'head'          => 'Tambah Pengguna',
             'name'          => $name,
             'img'           => $img,
             'date_created'  => $date_created
