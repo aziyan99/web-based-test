@@ -1,14 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Dec 12, 2019 at 03:28 PM
--- Server version: 5.7.23
--- PHP Version: 7.2.8
+-- Host: 127.0.0.1
+-- Generation Time: Dec 14, 2019 at 12:46 PM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `wbt`
@@ -28,25 +36,6 @@ CREATE TABLE `jawaban` (
   `id_mata_pelajaran` bigint(20) NOT NULL,
   `jawaban` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `jawaban`
---
-
-INSERT INTO `jawaban` (`id`, `id_soal`, `id_user`, `id_kelas`, `id_mata_pelajaran`, `jawaban`) VALUES
-(1, 1575357371, 11, 1, 1, 'b'),
-(2, 1575357451, 11, 1, 1, 'b'),
-(3, 1575357507, 11, 1, 1, 'c'),
-(4, 1575357585, 11, 1, 1, 'd'),
-(5, 1575357643, 11, 1, 1, 'a'),
-(6, 1575357706, 11, 1, 1, 'b'),
-(7, 1575357764, 11, 1, 1, 'b'),
-(8, 1575357845, 11, 1, 1, 'a'),
-(9, 1575357936, 11, 1, 1, 'c'),
-(10, 1575357996, 11, 1, 1, 'b'),
-(11, 1575358067, 11, 1, 1, 'c'),
-(12, 1575358154, 11, 1, 1, 'c'),
-(13, 1575358217, 11, 1, 1, 'b');
 
 -- --------------------------------------------------------
 
@@ -202,16 +191,12 @@ CREATE TABLE `profile_siswa` (
   `id` bigint(20) NOT NULL,
   `id_user` bigint(20) NOT NULL,
   `nis` bigint(20) NOT NULL,
-  `id_kelas` bigint(20) NOT NULL
+  `id_kelas` bigint(20) NOT NULL,
+  `ttl` date NOT NULL,
+  `tempat_lahir` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_ayah` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_ibu` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `profile_siswa`
---
-
-INSERT INTO `profile_siswa` (`id`, `id_user`, `nis`, `id_kelas`) VALUES
-(2, 11, 12345, 1),
-(3, 12, 12344, 1);
 
 -- --------------------------------------------------------
 
@@ -292,9 +277,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `nama`, `email`, `password`, `img`, `date_created`) VALUES
-(4, 1, 'Raja Azian', 'admin@admin.com', '$2y$10$wKPD3q3p4zhQrISUcHfRTeSLPQY9VyvQxilWMTxEG9MzzessAFK9O', 'images.png', 1562505744),
-(11, 5, 'Raja Aizin', 'aizin@ezstore.com', '$2y$10$lpeTV95Sh3u26eTdbddoMO6Ci2T0Z0nXHyA05UYFEfx1m3a2IKEGO', 'default.png', 1575905213),
-(12, 5, 'Raja wildhaatul Asthila', 'wildha@ezstore.com', '$2y$10$m7gduHl/08TB.kRMPArtn.l4uhduf2CzIxEiu7BbW5QtaUzMH7BeW', 'default.png', 1575911585);
+(4, 1, 'Raja Azian', 'admin@admin.com', '$2y$10$wKPD3q3p4zhQrISUcHfRTeSLPQY9VyvQxilWMTxEG9MzzessAFK9O', 'images.png', 1562505744);
 
 -- --------------------------------------------------------
 
@@ -424,7 +407,7 @@ ALTER TABLE `jawaban`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `pembahasan`
@@ -467,3 +450,8 @@ ALTER TABLE `users`
 --
 ALTER TABLE `user_access_menu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
