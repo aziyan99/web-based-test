@@ -66,4 +66,27 @@ class Pengaturan extends CI_Controller
             redirect('pengaturan');
         }
     }
+
+    public function backupDatabase()
+    {
+        $this->load->dbutil();
+        $this->load->helper('file');
+
+        $config = array(
+            'format'    => 'zip',
+            'filename'    => 'database.sql'
+        );
+
+        $backup = $this->dbutil->backup($config);
+
+        $save = FCPATH . 'assets/data/backup-' . date("ymdHis") . '-db.zip';
+
+        write_file($save, $backup);
+        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            Berhasil membackup Database
+            </div>');
+
+        redirect('pengaturan');
+    }
 }
