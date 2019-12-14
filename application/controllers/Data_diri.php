@@ -63,6 +63,10 @@ class Data_diri extends CI_Controller
 
     $this->form_validation->set_rules('nis', 'Nim', 'trim|required|numeric');
     $this->form_validation->set_rules('id_kelas', 'Id kelas', 'trim|required');
+    $this->form_validation->set_rules('ttl', 'Ttl', 'trim|required');
+    $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'trim|required');
+    $this->form_validation->set_rules('nama_ayah', 'Nama Ayah', 'trim|required');
+    $this->form_validation->set_rules('nama_ibu', 'Nama Ibu', 'trim|required');
 
     if ($this->form_validation->run() == false) {
       $this->session->set_flashdata('message', '
@@ -77,7 +81,11 @@ class Data_diri extends CI_Controller
       $id = htmlspecialchars($this->input->post('id'), true);
       $data = [
         'nis' => htmlspecialchars($this->input->post('nis'), true),
-        'id_kelas' => htmlspecialchars($this->input->post('id_kelas'), true)
+        'id_kelas' => htmlspecialchars($this->input->post('id_kelas'), true),
+        'ttl' => htmlspecialchars($this->input->post('ttl'), true),
+        'tempat_lahir' => htmlentities($this->input->post('tempat_lahir'), true),
+        'nama_ayah' => htmlentities($this->input->post('nama_ayah'), true),
+        'nama_ibu' => htmlentities($this->input->post('nama_ibu'), true)
       ];
 
       $this->data_diri->update($id, $data);

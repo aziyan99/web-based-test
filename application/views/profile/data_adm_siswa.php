@@ -28,16 +28,15 @@
           </div>
           <div class="form-group">
             <label for="ttl">Tanggal, bulan, dan tahun lahir</label>
-            <input type="date" name="ttl" id="ttl" class="form-control" disabled>
+            <input type="date" name="ttl" id="ttl" class="form-control" disabled value="<?= $adm['ttl']; ?>">
           </div>
           <div class="form-group">
             <label for="tempat_lahir">Tempat Lahir</label>
-            <textarea name="tempat_lahir" id="tempat_lahir" class="form-control" cols="30" rows="10" disabled></textarea>
+            <textarea name="tempat_lahir" id="tempat_lahir" class="form-control" cols="30" rows="10" disabled><?= $adm['tempat_lahir']; ?></textarea>
           </div>
         </div>
       </div>
   </div>
-  </form>
 
   <div class="col-md-6 col-lg-6 col-sm-6">
     <div class="box">
@@ -47,15 +46,16 @@
       <div class="box-body">
         <div class="form-group">
           <label for="nama_ayah">Nama Ayah</label>
-          <input type="text" id="nama_ayah" name="nama_ayah" class="form-control" disabled>
+          <input type="text" id="nama_ayah" name="nama_ayah" class="form-control" value="<?= $adm['nama_ayah']; ?>" disabled>
         </div>
         <div class="form-group">
           <label for="nama_ayah">Nama Ibu</label>
-          <input type="text" id="nama_ibu" name="nama_ibu" class="form-control" disabled>
+          <input type="text" id="nama_ibu" name="nama_ibu" class="form-control" value="<?= $adm['nama_ibu']; ?>" disabled>
         </div>
       </div>
     </div>
   </div>
+  </form>
 
 </div>
 <script type="text/javascript">
@@ -64,6 +64,10 @@
     $('#lock_ic').addClass('fa-unlock');
     $('#nis').removeAttr('disabled');
     $('#kelas').removeAttr('disabled');
+    $('#ttl').removeAttr('disabled');
+    $('#tempat_lahir').removeAttr('disabled');
+    $('#nama_ayah').removeAttr('disabled');
+    $('#nama_ibu').removeAttr('disabled');
     $('#btn_submit').removeAttr('disabled');
   })
 </script>
