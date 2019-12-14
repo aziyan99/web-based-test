@@ -69,5 +69,5 @@
     $('#nama_ayah').removeAttr('disabled');
     $('#nama_ibu').removeAttr('disabled');
     $('#btn_submit').removeAttr('disabled');
-  })
+  });
 </script>
