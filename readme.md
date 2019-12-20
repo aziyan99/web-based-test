@@ -83,6 +83,6 @@ For installing this template you can direct download or clone this project
 * [Startbootstrap](https://startbootstrap.com/)
 
 ## Licence
-* [MIT](licence.txt)
+* [MIT](https://github.com/aziyan99/web-based-test/blob/master/license.txt)
 
 
