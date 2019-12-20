@@ -83,6 +83,6 @@ For installing this template you can direct download or clone this project
 * [Startbootstrap](https://startbootstrap.com/)
 
 ## Licence
-* MIT
+* [MIT](other_file.md)
 
 
