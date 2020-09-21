@@ -31,7 +31,9 @@ class Dashboard extends CI_Controller
         $data['nama_mapel'] = $this->dashboard->get_mapel();
         $data['kls'] = $this->db->get('kelas')->result_array();
         $data['pengumuman'] = $this->dashboard->get_pengumuman();
-        $data['pengumuman_siswa'] = $this->dashboard->get_pengumuman_siswa();
+        if ($this->session->userdata('role_id') > 1 || $this->session->userdata('role_id') > 2) {
+            $data['pengumuman_siswa'] = $this->dashboard->get_pengumuman_siswa();
+        }
         $this->load->view('templates/head', $data);
         $this->load->view('templates/nav', $data);
         $this->load->view('templates/sidebar', $data);
